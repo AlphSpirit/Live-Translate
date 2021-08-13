@@ -1,0 +1,17 @@
+{
+  "name": "live-translate",
+  "main": "Main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@google-cloud/speech": "^4.5.3",
+    "audify": "^1.6.3",
+    "audiobuffer-to-wav": "^1.0.0",
+    "electron": "^13.1.6",
+    "naudiodon": "^2.3.5",
+    "node-audiorecorder": "^2.2.0",
+    "node-record-lpcm16": "^1.0.1",
+    "pcm-f32-to-i16": "^1.1.0"
+  }
+}

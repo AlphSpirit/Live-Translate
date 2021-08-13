@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    Allo!
+    <script>
+        async function start() {
+            let devices = await navigator.mediaDevices.enumerateDevices();
+            console.log(await navigator.mediaDevices.getUserMedia());
+            console.log(devices);
+            let device = devices[11];
+            console.log(device.deviceId);
+            let constraints = {
+                audio: {
+                    deviceId: {
+                        exact: device.deviceId
+                    }
+                }
+            }
+            navigator.mediaDevices.getUserMedia(constraints).then(stream => {
+                console.log(stream);
+                let audioContext = new AudioContext();
+                let source = audioContext.createMediaStreamSource(stream);
+                console.log(source);
+                source.addEventListener("data", () => {
+                    console.log("WUT");
+                });
+                let scriptProcessor = audioContext.createScriptProcessor();
+                scriptProcessor.onaudioprocess = e => {
+                    console.log(e);
+                    return e;
+                };
+                // source.connect(scriptProcessor);
+                // script
+                source.connect(audioContext.destination);
+            });
+        }
+        start();
+    </script>
+</body>
+</html>
